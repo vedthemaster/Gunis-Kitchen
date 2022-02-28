@@ -4,10 +4,17 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+using Gunis.Kitchen.Models;
+
 namespace Gunis.Kitchen.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext
+           : IdentityDbContext<MyIdentityUser, MyIdentityRole, Guid>
     {
+        public DbSet<Item> Items { get; set; }
+        public DbSet<Category> Categories { get; set; }
+
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
