@@ -25,12 +25,18 @@
             </div>
             <div class="form-group">
                 <label asp-for="ItemSize" class="control-label"></label>
-                <input asp-for="ItemSize" class="form-control" />
+               @* <input asp-for="ItemSize" class="form-control" /> *@
+                <select asp-for="ItemSize" class="form-control" name="itemsize" id="itemsize">
+                    <option value="" disabled selected>Size</option>
+                    <option value="Small">Small</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Large">Large</option>
+                </select>
                 <span asp-validation-for="ItemSize" class="text-danger"></span>
             </div>
-            <div class="form-group">
+                 <div class="form-group">
                 <label asp-for="ItemImage" class="control-label"></label>
-                <input asp-for="ItemImage" class="form-control" />
+                <input asp-for="ItemImage" accept="image/*" />
                 <span asp-validation-for="ItemImage" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -50,5 +56,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 }

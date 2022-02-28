@@ -28,12 +28,12 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.ItemSize)
-        </dd>
+        </dd>     
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ItemImage)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ItemImage)
+            <img src="@("~/image/"+Model.ImageName)" asp-append-version="true" width="250px" height = "250px">
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Category)
@@ -42,7 +42,7 @@
             @Html.DisplayFor(model => model.Category.CategoryName)
         </dd class>
     </dl>
-    
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="ItemId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gunis.Kitchen.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220228133541_Second")]
-    partial class Second
+    [Migration("20220228160949_AddedImageName")]
+    partial class AddedImageName
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -48,8 +48,7 @@ namespace Gunis.Kitchen.Migrations
                     b.Property<int>("CategoryID")
                         .HasColumnType("int");
 
-                    b.Property<string>("ItemImage")
-                        .IsRequired()
+                    b.Property<string>("ImageName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ItemName")

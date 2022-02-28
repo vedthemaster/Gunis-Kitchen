@@ -7,16 +7,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Gunis.Kitchen.Data;
 using Gunis.Kitchen.Models;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace Gunis.Kitchen.Controllers
 {
     public class ItemsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public ItemsController(ApplicationDbContext context)
+        public ItemsController(ApplicationDbContext context,IWebHostEnvironment hostEnvironment)
         {
             _context = context;
+            this._hostEnvironment = hostEnvironment;
         }
 
         // GET: Items
@@ -61,6 +65,18 @@ namespace Gunis.Kitchen.Controllers
         {
             if (ModelState.IsValid)
             {
+                // saving images to folder
+                string wwwRootPath = _hostEnvironment.WebRootPath;
+                string fileName = Path.GetFileNameWithoutExtension(item.ItemImage.FileName);
+                string extension = Path.GetExtension(item.ItemImage.FileName);
+                item.ImageName=fileName =fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                string path = Path.Combine(wwwRootPath + "/image/", fileName);
+
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    await item.ItemImage.CopyToAsync(fileStream);
+                }
+
                 _context.Add(item);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -100,8 +116,11 @@ namespace Gunis.Kitchen.Controllers
 
             if (ModelState.IsValid)
             {
+          
+
                 try
                 {
+
                     _context.Update(item);
                     await _context.SaveChangesAsync();
                 }

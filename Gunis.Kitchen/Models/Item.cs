@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -25,9 +26,14 @@ namespace Gunis.Kitchen.Models
         [Display(Name = "Item Size")]
         public string ItemSize { get; set; }
 
+        [Display(Name ="ImageName")]
+        public string ImageName { get; set; }
+
+        [NotMapped]
         [Display(Name ="Item Image")]
         [Required(ErrorMessage ="It can not be blank")]
-        public string ItemImage { get; set; }
+        public IFormFile ItemImage { get; set; }
+
 
         #region
         [Display(Name = "Category Name")]

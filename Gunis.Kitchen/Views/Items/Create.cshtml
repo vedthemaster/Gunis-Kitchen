@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="ItemName" class="control-label"></label>
@@ -25,21 +25,22 @@
             <div class="form-group">
                 <label asp-for="ItemSize" class="control-label"></label>
                 @* <input asp-for="ItemSize" class="form-control" /> *@
-                <select asp-for="ItemSize" class="form-control" name="itemsize" id="itemsize"> 
-                    <option value="Small">Small</option> 
-                    <option value="Medium">Medium</option> 
-                    <option value="Large">Large</option> 
+                <select asp-for="ItemSize" class="form-control" name="itemsize" id="itemsize">
+                    <option value="" disabled selected>Size</option>
+                    <option value="Small">Small</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Large">Large</option>
                 </select>
                 <span asp-validation-for="ItemSize" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ItemImage" class="control-label"></label>
-                <input asp-for="ItemImage" class="form-control" />
+                <input asp-for="ItemImage" accept="image/*" />
                 <span asp-validation-for="ItemImage" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CategoryID" class="control-label"></label>
-                <select asp-for="CategoryID" class ="form-control" asp-items="ViewBag.CategoryID"></select>
+                <select asp-for="CategoryID" class="form-control" asp-items="ViewBag.CategoryID"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -53,5 +54,5 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
