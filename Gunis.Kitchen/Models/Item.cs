@@ -25,6 +25,7 @@ namespace Gunis.Kitchen.Models
         [Display(Name = "Item Size")]
         public string ItemSize { get; set; }
 
+        [Display(Name ="Item Image")]
         [Required(ErrorMessage ="It can not be blank")]
         public string ItemImage { get; set; }
 
