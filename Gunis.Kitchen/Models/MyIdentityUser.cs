@@ -15,11 +15,7 @@ namespace Gunis.Kitchen.Models
         [MinLength(2, ErrorMessage = "{0} should have at least {1} characters.")]
         public string Name { get; set; }
 
-        [Display(Name = "Address")]
-        [Required(ErrorMessage = "{0} can not be empty {1}")]
-        [MinLength(25, ErrorMessage = "{0} should have at least {1} characters.")]
-        [MaxLength(25, ErrorMessage = "{0} can not have more than {1} characters.")]
-        public string Address { get; set; }
+   
 
         [Display(Name = "Date of Birth")]
         [Required]

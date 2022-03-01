@@ -61,6 +61,22 @@ namespace Gunis.Kitchen.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Display(Name = "Name")]
+            [Required(ErrorMessage = "{0} can not be empty")]
+            [MaxLength(30, ErrorMessage = "{0} can not have more than {1} characters.")]
+            [MinLength(2, ErrorMessage = "{0} should have at least {1} characters.")]
+            public string Name { get; set; }
+
+
+            [Display(Name = "Date of Birth")]
+            [Required]
+            [PersonalData]
+            public DateTime DateOfBirth { get; set; }
+
+            [Required(ErrorMessage = "Can not be Empty")]
+            public string Gender { get; set; }
+
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -75,7 +91,13 @@ namespace Gunis.Kitchen.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new MyIdentityUser { UserName = Input.Email, Email = Input.Email };
+                var user = new MyIdentityUser {
+                    UserName = Input.Email,
+                    Email = Input.Email,
+                    Name = Input.Name,
+                    DateOfBirth = Input.DateOfBirth,
+                    Gender = Input.Gender,
+                };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

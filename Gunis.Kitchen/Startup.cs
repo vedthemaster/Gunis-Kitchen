@@ -1,10 +1,12 @@
 using Gunis.Kitchen.Data;
 using Gunis.Kitchen.Models;
+using Gunis.Kitchen.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -69,6 +71,8 @@ namespace Gunis.Kitchen
                 });
 
             services.AddRazorPages();
+            services
+                .AddSingleton<IEmailSender, MyEmailSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -96,7 +100,10 @@ namespace Gunis.Kitchen
 
             app.UseEndpoints(endpoints =>
             {
-               
+                endpoints.MapControllerRoute(
+                   name: "areas",
+                   pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
 
                 endpoints.MapControllerRoute(
                     name: "default",
