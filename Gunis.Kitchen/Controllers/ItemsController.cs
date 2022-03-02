@@ -9,9 +9,11 @@ using Gunis.Kitchen.Data;
 using Gunis.Kitchen.Models;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Gunis.Kitchen.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ItemsController : Controller
     {
         private readonly ApplicationDbContext _context;
