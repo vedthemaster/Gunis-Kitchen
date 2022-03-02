@@ -8,10 +8,13 @@ namespace Gunis.Kitchen.Models
     public class MyIdentityRole
           : IdentityRole<Guid>
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int RoleId { get; set; }
 
-        [Display(Name = "Description")]
+        [Display(Name = "RoleName")]
         [StringLength(100, ErrorMessage = "{0} cannot have more than {1} characters.")]
-        public string Decription { get; set; }
+        public string RoleName { get; set; }
 
     }
 }
