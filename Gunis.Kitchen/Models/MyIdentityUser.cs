@@ -15,7 +15,8 @@ namespace Gunis.Kitchen.Models
         [MinLength(2, ErrorMessage = "{0} should have at least {1} characters.")]
         public string Name { get; set; }
 
-   
+        [Display(Name ="Admin Activation Key")]
+        public string AdminKey { get; set; }
 
         [Display(Name = "Date of Birth")]
         [Required]

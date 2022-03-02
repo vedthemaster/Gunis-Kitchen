@@ -62,6 +62,9 @@ namespace Gunis.Kitchen.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
+            [Display(Name = "Admin Activation Key")]
+            public string AdminKey { get; set; }
+
             [Display(Name = "Name")]
             [Required(ErrorMessage = "{0} can not be empty")]
             [MaxLength(30, ErrorMessage = "{0} can not have more than {1} characters.")]
@@ -97,11 +100,21 @@ namespace Gunis.Kitchen.Areas.Identity.Pages.Account
                     Name = Input.Name,
                     DateOfBirth = Input.DateOfBirth,
                     Gender = Input.Gender,
+                    AdminKey = Input.AdminKey
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
+                string EXPECTEDADMINKEY = "tghd53shhu7836vdh";
                 if (result.Succeeded)
                 {
-                    _userManager.AddToRoleAsync(user, "Admin").Wait();
+                    if (user.AdminKey == EXPECTEDADMINKEY)
+                    {
+                     _userManager.AddToRoleAsync(user, "Admin").Wait();
+                    }
+                    else
+                    {
+                     _userManager.AddToRoleAsync(user, "User").Wait();
+
+                    }
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
