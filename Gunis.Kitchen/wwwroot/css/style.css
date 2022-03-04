@@ -1,0 +1,156 @@
+.sec-block {
+    padding: 140px 0;
+}
+
+.sec-block-large {
+    padding: 155px 0;
+}
+.sec-block {
+    padding: 110px 0;
+}
+section {
+    position: relative;
+}
+
+.bg1 {
+    background-image: url(http://my-templates.online/deli-taste/assets/images/resources/bg1.jpg);
+}
+.fixed-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+.main-banner {
+    background-image: url(http://my-templates.online/deli-taste/assets/images/resources/banner-img.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 283px 0 254px;
+}
+
+    .main-banner .banner-text {
+        max-width: 650px;
+    }
+
+        .main-banner .banner-text h2 {
+            color: #fff;
+            text-transform: capitalize;
+            font-weight: 800;
+            font-size: 80px;
+            line-height: 88px;
+            margin-bottom: 29px;
+        }
+
+        .main-banner .banner-text > span {
+            display: block;
+            color: #FFFFFF;
+            font-size: 20px;
+            margin-bottom: 55px;
+        }
+
+        .main-banner .banner-text form {
+            position: relative;
+        }
+
+            .main-banner .banner-text form input {
+                width: 100%;
+                height: 80px;
+                background-color: #fff;
+                font-size: 14px;
+                padding: 0 40px;
+                border: 0;
+                border-radius: 50px;
+            }
+
+            .main-banner .banner-text form button {
+                background: linear-gradient(93.93deg, #D8AB37 0%, #F18345 100%);
+                font-size: 16px;
+                padding: 0 45px;
+                height: 64px;
+                line-height: 64px;
+                border: 0;
+                border-radius: 50px;
+                color: #fff;
+                position: absolute;
+                top: 8px;
+                right: 8px;
+            }
+.promotion {
+    max-width: 650px;
+}
+
+    .promotion > h2 {
+        font-weight: 800;
+        font-size: 80px;
+        line-height: 88px;
+        color: #fff;
+        margin-bottom: 28px;
+    }
+
+        .promotion > h2 span {
+            color: #D8AB37;
+        }
+
+    .promotion > span {
+        display: block;
+        font-size: 20px;
+        margin-bottom: 45px;
+        color: #fff;
+    }
+
+    .promotion p {
+        color: rgba(255, 255, 255, 0.6);
+        margin-bottom: 50px;
+        padding-right: 90px;
+    }
+
+    .promotion > h2 {
+        font-size: 60px;
+        line-height: 70px;
+    }
+.promotion {
+    text-align: left;
+}
+
+    .promotion > h2 {
+        font-size: 44px;
+        line-height: 59px;
+    }
+
+    .promotion p {
+        padding-right: 0;
+    }
+
+.btn-default {
+    display: inline-block;
+    background: linear-gradient(93.93deg, #D8AB37 0%, #F18345 100%);
+    height: 64px;
+    line-height: 64px;
+    padding: 0 45px;
+    overflow: hidden;
+    font-size: 16px;
+    position: relative;
+    color: #fff;
+    -webkit-border-radius: 50px;
+    -ms-border-radius: 50px;
+    border-radius: 50px;
+    z-index: 1;
+    text-transform: capitalize;
+}
+
+    .btn-default:hover {
+        color: #fff;
+    }
+
+    .btn-default.gradient-bg {
+        background: linear-gradient(93.93deg, #D8AB37 0%, #F18345 100%);
+    }
+
+   .promotion a{
+       text-decoration:none;
+   }
+

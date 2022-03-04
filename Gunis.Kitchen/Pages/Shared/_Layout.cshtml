@@ -5,14 +5,24 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>@ViewData["Title"] - Guni's Kitchen</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet"  href="~/css/style.css">
+
+    @*<link rel="stylesheet" type="text/css" href="../wwwroot/assets/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="../wwwroot/assets/css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="../wwwroot/assets/js/lib/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="../wwwroot/assets/js/lib/slick/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="../wwwroot/assets/css/flaticon.css">
+    <link rel="stylesheet" type="text/css" href="../wwwroot/assets/css/responsive.css">*@
+
 </head>
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm  border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">Gunis.Kitchen</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
@@ -20,20 +30,20 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav flex-grow-1 mainnavbar">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link " asp-area="" asp-page="/Index">Home</a>
                         </li>
                         @if (User.IsInRole("Admin"))
                         {
                             
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Items"
+                            <a class="nav-link " asp-area="" asp-controller="Items"
                                 asp-action="Index">Items</a>
                         </li>
                         
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Categories"
+                            <a class="nav-link  " asp-area="" asp-controller="Categories"
                                 asp-action="Index">Categories</a>
                         </li>
                         }
@@ -44,17 +54,13 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-    </div>
+    
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - Gunis.Kitchen - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
+  
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
