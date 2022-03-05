@@ -3,6 +3,7 @@ using Gunis.Kitchen.Models;
 using Gunis.Kitchen.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -71,8 +72,12 @@ namespace Gunis.Kitchen
                 });
 
             services.AddRazorPages();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(sp => ShoppingCart.GetCart(sp));
             services
                 .AddSingleton<IEmailSender, MyEmailSender>();
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -94,12 +99,16 @@ namespace Gunis.Kitchen
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthentication();
             app.UseAuthorization();
 
+
             app.UseEndpoints(endpoints =>
             {
+                
+                    
                 endpoints.MapControllerRoute(
                    name: "areas",
                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
@@ -108,6 +117,10 @@ namespace Gunis.Kitchen
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
+                
+                //endpoints.MapControllerRoute(
+                //    name: "categoryFilter",
+                //    pattern: "User/{action}/{category?}",defaults:new { Controller = "User",action="List"});
 
                 endpoints.MapRazorPages();
             });

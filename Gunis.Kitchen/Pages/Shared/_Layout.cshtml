@@ -12,11 +12,11 @@
     <link rel="stylesheet"  href="~/css/style.css">
 
     @*<link rel="stylesheet" type="text/css" href="../wwwroot/assets/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="../wwwroot/assets/css/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="../wwwroot/assets/js/lib/slick/slick.css">
-    <link rel="stylesheet" type="text/css" href="../wwwroot/assets/js/lib/slick/slick-theme.css">
-    <link rel="stylesheet" type="text/css" href="../wwwroot/assets/css/flaticon.css">
-    <link rel="stylesheet" type="text/css" href="../wwwroot/assets/css/responsive.css">*@
+        <link rel="stylesheet" type="text/css" href="../wwwroot/assets/css/animate.min.css">
+        <link rel="stylesheet" type="text/css" href="../wwwroot/assets/js/lib/slick/slick.css">
+        <link rel="stylesheet" type="text/css" href="../wwwroot/assets/js/lib/slick/slick-theme.css">
+        <link rel="stylesheet" type="text/css" href="../wwwroot/assets/css/flaticon.css">
+        <link rel="stylesheet" type="text/css" href="../wwwroot/assets/css/responsive.css">*@
 
 </head>
 
@@ -34,18 +34,25 @@
                         <li class="nav-item">
                             <a class="nav-link " asp-area="" asp-page="/Index">Home</a>
                         </li>
+                        @if (User.IsInRole("User"))
+                        {
+                        <li class="nav-item">
+                            @await Component.InvokeAsync("ShoppingCartSummary")
+                        </li>
+
+                        }
                         @if (User.IsInRole("Admin"))
                         {
-                            
-                        <li class="nav-item">
-                            <a class="nav-link " asp-area="" asp-controller="Items"
+
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="Items"
                                 asp-action="Index">Items</a>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a class="nav-link  " asp-area="" asp-controller="Categories"
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link  " asp-area="" asp-controller="Categories"
                                 asp-action="Index">Categories</a>
-                        </li>
+                            </li>
                         }
 
                     </ul>
@@ -56,11 +63,11 @@
     </header>
 
         <main role="main" class="pb-3">
-            @RenderBody()
+        @RenderBody()
         </main>
-    
 
-  
+
+
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
