@@ -94,3 +94,11 @@ body {
 .card{
     background-color:black;
 }
+.cartstatus{
+    text-decoration:none;
+    color:white;
+}
+.cartstatus:hover{
+    text-decoration:none;
+    color:orange;
+}

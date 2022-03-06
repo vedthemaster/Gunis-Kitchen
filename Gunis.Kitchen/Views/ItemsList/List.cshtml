@@ -28,8 +28,9 @@
               
                     <div class="card-text">
 
-                        <a class="btn btn-success text-light"> Buy Now</a> &nbsp; <a
-                            class="btn btn-danger text-light"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To
+                        <a class="btn btn-success text-light"> Buy Now</a> &nbsp; 
+                        <a
+                            class="btn btn-danger text-light" asp-controller="ShoppingCart" asp-action="AddToShoppingCart" asp-route-itemId="@item.ItemId"  ><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To
                             Cart</a> <br /><br />
                     </div>
                 </div>

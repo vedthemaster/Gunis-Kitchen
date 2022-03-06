@@ -2,8 +2,6 @@
     padding: 140px 0;
 }
 
-
-
 .sec-block-large {
     padding: 155px 0;
 }
@@ -160,4 +158,18 @@ section {
     width : 253px;
     height : 169px;
 }
+.checkoutForm img {
+    width: 253px;
+    height: 169px;
+}
+.nav-item a:hover{
+    color:orange;    
+}
+.btn-link{
+    color:white;
+}
+.btn-link:hover {
+    color: red;
+}
+
 

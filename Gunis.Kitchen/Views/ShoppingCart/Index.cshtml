@@ -1,54 +1,77 @@
 ﻿@model Gunis.Kitchen.ViewModel.ShoppingCartViewModel
 
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<style>
+.checkoutForm table{
+    color:white;
+}
+</style>
+
+<div class="container">
+
 <div class="row checkoutForm">
     <h2>Your shopping cart</h2>
-    <h4>Here are the items in your shopping cart.</h4>
+  
+    
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>Selected amount</th>
+                <th>Selected Quantity</th>
+                <th>Item Image</th>
                 <th>Item</th>
                 <th class="text-right">Price</th>
                 <th class="text-right">Subtotal</th>
-                <th></th>
+                <th class="text-right">Remove</th>
+                
             </tr>
         </thead>
         <tbody>
-            @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
-            {
-                <tr>
-                    <td class="text-center">@line.Amount</td>
-                    <td class="text-left">@line.Item.ItemName</td>
-                    <td class="text-right">@line.Item.ItemPrice.ToString("c")</td>
-                    <td class="text-right">
-                        @((line.Amount * line.Item.ItemPrice).ToString("c"))
-                    </td>
-                    <td class="text-center"><a class="glyphicon glyphicon-remove text-danger remove" asp-controller="ShoppingCart" asp-action="RemoveFromShoppingCart" asp-route-itemId="@line.Item.ItemId"></a></td>
-                </tr>
-            }
+                @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
+                {
+                    <tr>
+                        <td class="text-center">@line.Quantity</td>
+                        <td> <img src="@Url.Content("~/image/"+@line.Item.ImageName)"> </td>
+                        <td class="text-left">@line.Item.ItemName</td>
+                        <td class="text-right">@line.Item.ItemPrice.ToString("c")</td>
+                        <td class="text-right">
+                            @((line.Quantity * line.Item.ItemPrice).ToString("c"))
+                        </td>
+                        <td class="text-right">
+                        <a asp-controller="ShoppingCart" asp-action="RemoveFromShoppingCart" asp-route-itemId="@line.Item.ItemId">
+                        <i class="fa fa-remove" style="color:red;font-size:25px;"></i>
+                        </a>
+                        </td>
+
+                    </tr>
+                }
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="3" class="text-right">Total:</td>
+                <td colspan="4" class="text-right">Total:</td>
                 <td class="text-right">
-                    @Model.ShoppingCartTotal.ToString("c")
+                        @Model.ShoppingCartTotal.ToString("c")
                 </td>
             </tr>
         </tfoot>
     </table>
 
     <div class="text-right">
-        <div class="btn-group ">
-            <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Check out</a>
+        <div class="btn-group">
+            <a class="btn btn-success text-light" asp-controller="Order" asp-action="Checkout"> Checkout</a> &nbsp;
+
             <a class="btn-group">
-                <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <a class="btn btn-primary dropdown-toggle text-light" data-toggle="dropdown">
                     Add more items<span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a asp-controller="Item" asp-action="List" asp-route-category="Alcoholic">Alcoholic</a></li>
-                    <li><a asp-controller="Item" asp-action="List" asp-route-category="Non-alcoholic">Non Alcoholic</a></li>
+                    <li><a class="nav-link" asp-controller="ItemsList" asp-action="List" asp-route-category="Pizza">Pizza</a></li>
+                    <li><a class="nav-link" asp-controller="ItemsList" asp-action="List" asp-route-category="Burger">Burger</a></li>
                 </ul>
             </a>
         </div>
     </div>
+</div>
 </div>

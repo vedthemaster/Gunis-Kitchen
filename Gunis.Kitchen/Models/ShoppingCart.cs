@@ -43,14 +43,14 @@ namespace Gunis.Kitchen.Models
                 {
                     ShoppingCartId = ShoppingCartId,
                     Item = item,
-                    Amount = 1
+                    Quantity = 1
                 };
 
                 _appDbContext.ShoppingCartItems.Add(shoppingCartItem);
             }
             else
             {
-                shoppingCartItem.Amount++;
+                shoppingCartItem.Quantity++;
             }
             _appDbContext.SaveChanges();
         }
@@ -60,14 +60,14 @@ namespace Gunis.Kitchen.Models
                     _appDbContext.ShoppingCartItems.SingleOrDefault(
                         s => s.Item.ItemId == item.ItemId && s.ShoppingCartId == ShoppingCartId);
 
-            var localAmount = 0;
+            var localQuantity = 0;
 
             if (shoppingCartItem != null)
             {
-                if (shoppingCartItem.Amount > 1)
+                if (shoppingCartItem.Quantity > 1)
                 {
-                    shoppingCartItem.Amount--;
-                    localAmount = shoppingCartItem.Amount;
+                    shoppingCartItem.Quantity--;
+                    localQuantity = shoppingCartItem.Quantity;
                 }
                 else
                 {
@@ -77,7 +77,7 @@ namespace Gunis.Kitchen.Models
 
             _appDbContext.SaveChanges();
 
-            return localAmount;
+            return localQuantity;
         }
         public List<ShoppingCartItem> GetShoppingCartItems()
         {
@@ -101,7 +101,7 @@ namespace Gunis.Kitchen.Models
         public decimal GetShoppingCartTotal()
         {
             var total = _appDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
-                .Select(c => c.Item.ItemPrice * c.Amount).Sum();
+                .Select(c => c.Item.ItemPrice * c.Quantity).Sum();
             return total;
         }
 

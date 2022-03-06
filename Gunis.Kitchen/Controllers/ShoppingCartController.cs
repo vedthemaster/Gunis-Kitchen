@@ -1,11 +1,13 @@
 ﻿using Gunis.Kitchen.Data;
 using Gunis.Kitchen.Models;
 using Gunis.Kitchen.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
 namespace Gunis.Kitchen.Controllers
 {
+    [Authorize(Roles = "User")]
     public class ShoppingCartController : Controller
     {
         private readonly ApplicationDbContext _context;
