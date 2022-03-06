@@ -1,0 +1,71 @@
+﻿@model Gunis.Kitchen.ViewModel.ItemListViewModel
+
+@{
+    ViewData["Title"] = "Items";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+ <div class="container">
+        <div class="row mt-5">
+            <h2>Order Now</h2>
+        </div>
+        <div class="row mt-5">
+
+        @foreach (var item in Model.Items)
+        {
+            <div class="col-md-3">
+                <div class="card">
+                   <img src="@Url.Content("~/image/"+item.ImageName)" class="card-img-top img-fluid" >
+
+                    <div class="card-title">
+                        <h4> @Html.DisplayFor(modelItem => item.ItemName)</h4>
+                    </div>
+                    <div class="card-subtitle">
+                        <p>Price :  @Html.DisplayFor(modelItem => item.ItemPrice) </p>
+                        <p>Size  :  @Html.DisplayFor(modelItem => item.ItemSize) </p>
+
+                    </div>
+              
+                    <div class="card-text">
+
+                        <a class="btn btn-success text-light"> Buy Now</a> &nbsp; <a
+                            class="btn btn-danger text-light"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To
+                            Cart</a> <br /><br />
+                    </div>
+                </div>
+            </div>
+        }
+           </div>
+    </div>
+@*<div class="row marginTop">
+    <div class="container">
+
+   
+    @foreach (var item in Model.Items)
+    {
+        
+         <div class="col-md-3">
+                <div class="card">
+                   <img src="@Url.Content("~/image/"+item.ImageName)" class="card-img-top img-fluid" >
+
+                    <div class="card-title">
+                        <h4> @Html.DisplayFor(modelItem => item.ItemName)</h4>
+                    </div>
+                    <div class="card-subtitle">
+                        <p>Price :  @Html.DisplayFor(modelItem => item.ItemPrice) </p>
+                        <p>Size  :  @Html.DisplayFor(modelItem => item.ItemSize) </p>
+
+                    </div>
+              
+                    <div class="card-text">
+
+                        <a class="btn btn-success text-light"> Buy Now</a> &nbsp; <a
+                            class="btn btn-danger text-light"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add To
+                            Cart</a> <br /><br />
+                    </div>
+                </div>
+            </div>
+  
+    }
+    </div>
+</div>*@

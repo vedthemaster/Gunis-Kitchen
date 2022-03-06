@@ -118,9 +118,9 @@ namespace Gunis.Kitchen
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
                 
-                //endpoints.MapControllerRoute(
-                //    name: "categoryFilter",
-                //    pattern: "User/{action}/{category?}",defaults:new { Controller = "User",action="List"});
+                endpoints.MapControllerRoute(
+                    name: "categoryFilter",
+                    pattern: "ItemsList/{action}/{category?}",defaults:new { Controller = "ItemsList",action="List"});
 
                 endpoints.MapRazorPages();
             });

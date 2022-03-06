@@ -1,0 +1,35 @@
+﻿
+<style>
+    .dropdown-menu li a{
+        text-decoration:none;
+        color:black
+    }
+    .dropdown-toggle{
+        text-decoration:none;
+        color:white;
+    }
+    .dropdown-toggle:hover{
+        text-decoration:none;
+        color:orange;
+    }
+
+
+</style>
+<li class="dropdown nav-link">
+    <a asp-controller="Drink"
+       asp-action="Index"
+       class="dropdown-toggle " data-toggle="dropdown">Items<b class="caret"></b></a>
+    <ul class="dropdown-menu">
+        @foreach (var category in Model)
+        {
+            <li>
+                <a  class="nav-link"asp-controller="ItemsList" asp-action="List"
+                   asp-route-category="@category.CategoryName">@category.CategoryName</a>
+            </li>
+        }
+        <li class="divider"></li>
+        <li>
+            <a   class="nav-link" asp-controller="ItemsList" asp-action="List" asp-route-category="">View all Items</a>
+        </li>
+    </ul>
+</li>

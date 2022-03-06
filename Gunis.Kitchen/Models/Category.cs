@@ -19,7 +19,8 @@ namespace Gunis.Kitchen.Models
         public string CategoryName { get; set; }
 
         #region
-        public ICollection<Item> Items { get; set; }
+        public List<Item> Items { get; set; }
+        
 
         #endregion
 

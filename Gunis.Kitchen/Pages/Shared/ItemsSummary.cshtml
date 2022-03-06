@@ -1,0 +1,27 @@
+﻿@model Gunis.Kitchen.Models.Item
+
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        @*<img src="@Url.Content("~/image/"+item.ImageName)" alt="" />*@
+        <div class="caption">
+            
+            <h3>
+                @Model.ItemName
+            </h3>
+            <h3 class="pull-right">@Model.ItemPrice.ToString("c")</h3>
+            <div class="card-subtitle">
+                        <p>Price :  @Model.ItemPrice</p>
+                        <p>Size  :  @Model.ItemSize </p>
+
+            </div>
+        </div>
+  @*      <div class="addToCart text-right">
+            <p class="button ">
+                <a class="btn btn-success" id="cartButton" asp-controller="ShoppingCart" asp-action="AddToShoppingCart" asp-route-drinkId="@Model.DrinkId">
+                    Add to cart
+                </a>
+            </p>
+        </div>*@
+    </div>
+</div>
