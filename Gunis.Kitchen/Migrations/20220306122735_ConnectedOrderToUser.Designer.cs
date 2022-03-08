@@ -4,14 +4,16 @@ using Gunis.Kitchen.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Gunis.Kitchen.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220306122735_ConnectedOrderToUser")]
+    partial class ConnectedOrderToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -194,12 +196,10 @@ namespace Gunis.Kitchen.Migrations
 
                     b.Property<string>("AddressLine1")
                         .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("AddressLine2")
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -218,7 +218,6 @@ namespace Gunis.Kitchen.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("PaymentMethod")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("State")
@@ -230,7 +229,7 @@ namespace Gunis.Kitchen.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("ZipCode")
-                        .HasMaxLength(8)
+                        .HasMaxLength(6)
                         .HasColumnType("int");
 
                     b.HasKey("OrderId");

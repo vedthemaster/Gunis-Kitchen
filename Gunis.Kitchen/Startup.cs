@@ -1,5 +1,7 @@
 using Gunis.Kitchen.Data;
+using Gunis.Kitchen.Interfaces;
 using Gunis.Kitchen.Models;
+using Gunis.Kitchen.Repositories;
 using Gunis.Kitchen.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -78,6 +80,7 @@ namespace Gunis.Kitchen
                 .AddSingleton<IEmailSender, MyEmailSender>();
             services.AddMemoryCache();
             services.AddSession();
+            services.AddTransient<IOrderRepository, OrderRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

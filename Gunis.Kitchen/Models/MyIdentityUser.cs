@@ -27,5 +27,7 @@ namespace Gunis.Kitchen.Models
         [Required(ErrorMessage = "Can not be Empty")]
         public string Gender { get; set; }
 
+        public Order Order { get; set; }
+
     }
 }
