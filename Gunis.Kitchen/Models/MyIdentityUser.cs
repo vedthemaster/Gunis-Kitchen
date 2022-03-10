@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
@@ -27,7 +28,7 @@ namespace Gunis.Kitchen.Models
         [Required(ErrorMessage = "Can not be Empty")]
         public string Gender { get; set; }
 
-        public Order Order { get; set; }
+        public List<Order> Orders { get; set; }
 
 
 
