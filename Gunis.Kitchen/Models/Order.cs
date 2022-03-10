@@ -45,12 +45,10 @@ namespace Gunis.Kitchen.Models
         [Required(ErrorMessage = "{0} can not be empty")]
         public string PaymentMethod { get; set; }
 
-        [BindNever]
-        [ScaffoldColumn(false)]
+        
         public DateTime OrderPlaced { get; set; }
 
-        [ScaffoldColumn(false)]
-        [BindNever]
+
         public int OrderTotal { get; set; }
 
         public MyIdentityUser User { get; set; }

@@ -3,7 +3,9 @@ using Gunis.Kitchen.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Gunis.Kitchen.Controllers
 {
@@ -27,19 +29,10 @@ namespace Gunis.Kitchen.Controllers
             return View();
         }
 
-        public void CreateOrder(Order order)
+        public async void CreateOrder(Order order)
         {
-            //var user =  _userManager.GetUserAsync(this.User);
-            //var NewOrderId = user.Id + DateTime.Now.ToString("yymmssfff");
-            //order.OrderId = NewOrderId;
-          
-            order.OrderPlaced = DateTime.Now;
-            _applicationDbContext.Orders.Add(order);
             var shoppingCartItems = _shoppingCart.ShoppingCartItems;
           
-          
-
-
             foreach (var unit in shoppingCartItems)
             {
                 var orderDetail = new OrderDetail()
@@ -56,12 +49,19 @@ namespace Gunis.Kitchen.Controllers
         }
 
         [HttpPost]
-        public IActionResult Checkout(Order order)
+        public async Task<IActionResult>Checkout(Order order)
         {
             var units = _shoppingCart.GetShoppingCartItems();
             _shoppingCart.ShoppingCartItems = units;
             if (ModelState.IsValid)
             {
+             var user =  await _userManager.GetUserAsync(this.User);
+         
+             order.OrderPlaced = DateTime.Now;
+
+             order.Id = user.Id;
+             order.OrderTotal = _shoppingCart.GetShoppingCartTotal();
+             _applicationDbContext.Orders.Add(order);
                 CreateOrder(order);
                 _shoppingCart.ClearCart();
                 return RedirectToAction("CheckoutComplete");

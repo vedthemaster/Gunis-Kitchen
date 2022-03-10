@@ -98,7 +98,7 @@ namespace Gunis.Kitchen.Models
             _appDbContext.SaveChanges();
         }
 
-        public decimal GetShoppingCartTotal()
+        public int GetShoppingCartTotal()
         {
             var total = _appDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
                 .Select(c => c.Item.ItemPrice * c.Quantity).Sum();
