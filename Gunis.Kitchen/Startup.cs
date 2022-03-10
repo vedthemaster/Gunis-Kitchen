@@ -36,6 +36,7 @@ namespace Gunis.Kitchen
                        options.UseSqlServer(
                            Configuration.GetConnectionString("DefaultConnection")));
 
+
             services
                 .AddDatabaseDeveloperPageExceptionFilter();
 

@@ -185,6 +185,83 @@ namespace Gunis.Kitchen.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Gunis.Kitchen.Models.Order", b =>
+                {
+                    b.Property<string>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AddressLine1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AddressLine2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("OrderPlaced")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OrderTotal")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PaymentMethod")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ZipCode")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderId");
+
+                    b.HasIndex("Id")
+                        .IsUnique();
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Gunis.Kitchen.Models.OrderDetail", b =>
+                {
+                    b.Property<int>("OrderDetailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ItemPrice")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OrderId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderDetailId");
+
+                    b.HasIndex("ItemId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderDetails");
+                });
+
             modelBuilder.Entity("Gunis.Kitchen.Models.ShoppingCartItem", b =>
                 {
                     b.Property<int>("ShoppingCartItemID")
@@ -320,6 +397,34 @@ namespace Gunis.Kitchen.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("Gunis.Kitchen.Models.Order", b =>
+                {
+                    b.HasOne("Gunis.Kitchen.Models.MyIdentityUser", "User")
+                        .WithOne("Order")
+                        .HasForeignKey("Gunis.Kitchen.Models.Order", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Gunis.Kitchen.Models.OrderDetail", b =>
+                {
+                    b.HasOne("Gunis.Kitchen.Models.Item", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Gunis.Kitchen.Models.Order", "Order")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("OrderId");
+
+                    b.Navigation("Item");
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("Gunis.Kitchen.Models.ShoppingCartItem", b =>
                 {
                     b.HasOne("Gunis.Kitchen.Models.Item", "Item")
@@ -383,6 +488,16 @@ namespace Gunis.Kitchen.Migrations
             modelBuilder.Entity("Gunis.Kitchen.Models.Category", b =>
                 {
                     b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("Gunis.Kitchen.Models.MyIdentityUser", b =>
+                {
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("Gunis.Kitchen.Models.Order", b =>
+                {
+                    b.Navigation("OrderDetails");
                 });
 #pragma warning restore 612, 618
         }
