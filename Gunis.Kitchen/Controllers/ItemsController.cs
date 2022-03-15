@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Gunis.Kitchen.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class ItemsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -63,7 +63,7 @@ namespace Gunis.Kitchen.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ItemId,ItemName,ItemPrice,ItemSize,ItemImage,CategoryID")] Item item)
+        public async Task<IActionResult> Create([Bind("ItemId,ItemName,ItemPrice,ItemSize,UnitOfMeasure,ItemImage,CategoryID")] Item item)
         {
             if (ModelState.IsValid)
             {
@@ -109,7 +109,7 @@ namespace Gunis.Kitchen.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ItemId,ItemName,ItemPrice,ItemSize,ItemImage,CategoryID")] Item item)
+        public async Task<IActionResult> Edit(int id, [Bind("ItemId,ItemName,UnitOfMeasure,ItemPrice,ItemSize,ItemImage,CategoryID")] Item item)
         {
             if (id != item.ItemId)
             {

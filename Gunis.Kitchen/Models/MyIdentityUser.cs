@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Gunis.Kitchen.Models.Enums;
 using Microsoft.AspNetCore.Identity;
 
 
@@ -25,8 +26,10 @@ namespace Gunis.Kitchen.Models
         [Column(TypeName = "smalldatetime")]
         public DateTime DateOfBirth { get; set; }
 
+        [Display(Name="Gender")]
+        [PersonalData]
         [Required(ErrorMessage = "Can not be Empty")]
-        public string Gender { get; set; }
+        public MyIdentityGenders Gender { get; set; }
 
         public List<Order> Orders { get; set; }
 

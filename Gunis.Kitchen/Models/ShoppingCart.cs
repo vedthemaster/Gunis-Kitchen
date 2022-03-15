@@ -102,7 +102,7 @@ namespace Gunis.Kitchen.Models
         {
             var total = _appDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
                 .Select(c => c.Item.ItemPrice * c.Quantity).Sum();
-            return total;
+            return (int)total;
         }
 
 

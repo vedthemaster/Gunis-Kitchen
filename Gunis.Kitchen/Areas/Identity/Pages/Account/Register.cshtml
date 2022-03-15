@@ -1,5 +1,6 @@
 ﻿@page
 @model RegisterModel
+@using Gunis.Kitchen.Models.Enums
 @{
     ViewData["Title"] = "Register";
 }
@@ -46,12 +47,34 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Input.Gender"></label>
+                    <br>
+
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-success">
+                        <input asp-for="Input.Gender" type="radio" class="form-check-input"
+                               id="Input.Gender.Male" name="Input.Gender"
+                               value="@MyIdentityGenders.Male" />
+                        Male
+                    </label>
+                    <label class="btn btn-success">
+                        <input asp-for="Input.Gender" type="radio" class="form-check-input"
+                               id="Input.Gender.Female" name="Input.Gender"
+                               value="@MyIdentityGenders.Female" />
+                        Female
+                    </label>
+                    <label class="btn btn-success">
+                        <input asp-for="Input.Gender" type="radio" class="form-check-input"
+                               id="Input.Gender.ThirdGender" name="Input.Gender"
+                               value="@MyIdentityGenders.ThirdGender" />
+                        Third Gender
+                    </label>
+                </div>
                     @* <input asp-for="Input.Gender" class="form-control" /> *@
-                    <select asp-for="Input.Gender" class="form-control">
+                    @*       <select asp-for="Input.Gender" class="form-control">
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
-                    </select>
-                    <span asp-validation-for="Input.Gender" class="text-danger"></span>
+                        </select>*@
+                    <span asp-validation-for="Input.Gender" class="text-danger" style="Disply:block;"></span>
                 </div>
                 <button type="submit" class="btn btn-primary">Register</button>
             </form>
@@ -64,7 +87,7 @@
                                 <p>
                             @foreach (var provider in Model.ExternalLogins)
                             {
-                                            <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name"
+                                                <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name"
                                     title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
                             }
                                 </p>

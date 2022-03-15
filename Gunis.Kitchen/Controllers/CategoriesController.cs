@@ -56,7 +56,7 @@ namespace Gunis.Kitchen.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CategoryId,CategoryName")] Category category)
+        public async Task<IActionResult> Create([Bind("CategoryId,CategoryName,CreatedAt")] Category category)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace Gunis.Kitchen.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CategoryId,CategoryName")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("CategoryId,CategoryName,CreatedAt")] Category category)
         {
             if (id != category.CategoryId)
             {

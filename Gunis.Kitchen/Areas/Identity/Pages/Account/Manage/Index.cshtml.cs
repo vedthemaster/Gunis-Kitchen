@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Gunis.Kitchen.Data;
 using Gunis.Kitchen.Models;
+using Gunis.Kitchen.Models.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,13 +16,17 @@ namespace Gunis.Kitchen.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<MyIdentityUser> _userManager;
         private readonly SignInManager<MyIdentityUser> _signInManager;
+        private readonly ApplicationDbContext _dbContext;
 
         public IndexModel(
             UserManager<MyIdentityUser> userManager,
-            SignInManager<MyIdentityUser> signInManager)
+            SignInManager<MyIdentityUser> signInManager,
+            ApplicationDbContext dbContext
+            )
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _dbContext = dbContext;
         }
 
         public string Username { get; set; }
@@ -36,6 +42,10 @@ namespace Gunis.Kitchen.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            [Required(ErrorMessage = "Please choose your Gender")]
+            [Display(Name = "Gender")]
+            public MyIdentityGenders Gender { get; set; }
         }
 
         private async Task LoadAsync(MyIdentityUser user)
@@ -47,7 +57,8 @@ namespace Gunis.Kitchen.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                Gender = user.Gender
             };
         }
 
@@ -64,6 +75,7 @@ namespace Gunis.Kitchen.Areas.Identity.Pages.Account.Manage
         }
 
         public async Task<IActionResult> OnPostAsync()
+
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -88,9 +100,21 @@ namespace Gunis.Kitchen.Areas.Identity.Pages.Account.Manage
                 }
             }
 
-            await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
-            return RedirectToPage();
+            bool hasOtherChanges = false;
+
+            if (Input.Gender != user.Gender)
+            {
+                user.Gender = Input.Gender;
+                hasOtherChanges = true;
+            }
+
+            if (hasOtherChanges)
+            {
+                _dbContext.SaveChanges();
+                StatusMessage = "Your profile has been updated";
+                await _signInManager.RefreshSignInAsync(user);
+            }
+                return RedirectToPage();
         }
     }
 }

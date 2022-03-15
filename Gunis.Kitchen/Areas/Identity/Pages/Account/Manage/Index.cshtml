@@ -1,4 +1,5 @@
 ﻿@page
+@using Gunis.Kitchen.Models.Enums
 @model IndexModel
 @{
     ViewData["Title"] = "Profile";
@@ -20,6 +21,18 @@
                 <input asp-for="Input.PhoneNumber" class="form-control" />
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
+             <div class="form-group">
+                <label asp-for="Input.Gender" class="control-label"></label>
+                <br />
+                @foreach(var item in Enum.GetValues(typeof(MyIdentityGenders)).OfType<MyIdentityGenders>())
+                {
+                    <input type="radio" 
+                           asp-for="Input.Gender" value="@((int)item)" 
+                           checked="@(item == Model?.Input.Gender)" />
+                    <label asp-for="Input.Gender">@item</label>
+                }
+            </div>
+
             <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>

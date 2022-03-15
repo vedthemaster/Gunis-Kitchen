@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Gunis.Kitchen.Models.Enums;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,10 +22,18 @@ namespace Gunis.Kitchen.Models
         [Display(Name = "Item Price")]
         [Required(ErrorMessage = "{0} can not be empty")]
         [Range(minimum: 100, maximum: 2000, ErrorMessage = "{0} needs to between {1} and {2}")]
-        public int ItemPrice { get; set; }
+        public decimal ItemPrice { get; set; }
 
-        [Display(Name = "Item Size")]
-        public string ItemSize { get; set; }
+        [Required]
+        [Display(Name ="Unit of Measure")]
+        public string UnitOfMeasure { get; set; }
+
+        //[Display(Name = "Item Size")]
+        //public string ItemSize { get; set; }
+
+        [Display(Name = "Size")]
+        [Column(TypeName = "varchar(20)")]
+        public ProductSizes ItemSize { get; set; }
 
         [Display(Name ="ImageName")]
         public string ImageName { get; set; }

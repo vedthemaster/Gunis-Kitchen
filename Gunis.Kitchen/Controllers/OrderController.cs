@@ -39,7 +39,7 @@ namespace Gunis.Kitchen.Controllers
                 {
                     Quantity = unit.Quantity,
                     ItemId = unit.Item.ItemId,
-                    ItemPrice = unit.Item.ItemPrice,
+                    ItemPrice = (int)unit.Item.ItemPrice,
                     OrderId= order.OrderId,
 
                 };

@@ -18,6 +18,10 @@ namespace Gunis.Kitchen.Models
         [MaxLength(15, ErrorMessage = "{0} can not have more than {1} characters")]
         public string CategoryName { get; set; }
 
+        [Display(Name ="Created At")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime CreatedAt { get; set; }
+
         #region
         public List<Item> Items { get; set; }
         

@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Gunis.Kitchen.Models.Enums;
 
 namespace Gunis.Kitchen.Areas.Identity.Pages.Account
 {
@@ -77,8 +78,9 @@ namespace Gunis.Kitchen.Areas.Identity.Pages.Account
             [PersonalData]
             public DateTime DateOfBirth { get; set; }
 
-            [Required(ErrorMessage = "Can not be Empty")]
-            public string Gender { get; set; }
+            [Required(ErrorMessage = "Please choose your Gender")]
+            [Display(Name="Gender")]
+            public MyIdentityGenders Gender { get; set; }
 
         }
 
@@ -125,8 +127,8 @@ namespace Gunis.Kitchen.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
