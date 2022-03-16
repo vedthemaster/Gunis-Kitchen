@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Gunis.Kitchen.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;

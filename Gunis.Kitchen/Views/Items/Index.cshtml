@@ -17,7 +17,7 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+@*<table class="table">
     <thead>
         <tr>
             <th>
@@ -59,5 +59,36 @@
         </tr>
 }
     </tbody>
-</table>
+</table>*@
+<style>
+
+.card-title,.card-text{
+    color:black;
+}
+</style>
+
+<div class="card-columns">
+    @foreach (var unit in Model)
+    {
+        <div class="card bg-light">
+            <div class="font-weight-bold text-center" 
+                 style="border-bottom: 2px dashed #ccc; width: 80%; margin: 0 auto; padding:10px;">
+                @Html.DisplayFor(modelItem => unit.Category.CategoryName)
+            </div>
+            <div style="max-width:390px;">
+                <img src="@unit.ItemImageFileUrl" class="img-fluid rounded card-img-top" />
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">@Html.DisplayFor(modelItem => unit.ItemName)</h4>
+                <p class="card-text">@Html.DisplayFor(modelItem => unit.ItemSize)</p>
+                <h5 class="card-text text-center">@unit.ItemPrice.ToString("$ 0.00")</h5>
+            </div>
+            <div class="card-footer text-right">
+                <a class="btn btn-sm btn-outline-primary" asp-action="Edit" asp-route-id="@unit.ItemId">Edit</a> 
+                <a class="btn btn-sm btn-outline-primary" asp-action="Details" asp-route-id="@unit.ItemId">Details</a> 
+                <a class="btn btn-sm btn-outline-primary" asp-action="Delete" asp-route-id="@unit.ItemId">Delete</a>
+            </div>
+        </div>
+    }
+</div>
 </div>

@@ -19,28 +19,30 @@ using Microsoft.Extensions.Hosting;
 
 namespace Gunis.Kitchen.Areas.Identity.Pages.Account
 {
-   // [Authorize(Roles ="Admin")]
-    public class RegisterModel : PageModel
+    [AllowAnonymous]
+    public class RegisterManagerModel : PageModel
     {
+
+        private const string StandardPassword = "Password!123";
+
         private readonly SignInManager<MyIdentityUser> _signInManager;
         private readonly UserManager<MyIdentityUser> _userManager;
-        private readonly IHostEnvironment _hostEnvironment;
+        private readonly IHostEnvironment _environment;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-        private const string EXPECTEDADMINKEY = "tghd53shhu7836vdh";
 
-        public RegisterModel(
+        public RegisterManagerModel(
             UserManager<MyIdentityUser> userManager,
             SignInManager<MyIdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IHostEnvironment hostEnvironment,
+            IHostEnvironment environment,
             IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
-            _hostEnvironment = hostEnvironment;
+            _environment = environment;
         }
 
         [BindProperty]
@@ -57,19 +59,7 @@ namespace Gunis.Kitchen.Areas.Identity.Pages.Account
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-            [DataType(DataType.Password)]
-            [Display(Name = "Password")]
-            public string Password { get; set; }
 
-            [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-            public string ConfirmPassword { get; set; }
-
-            [Display(Name = "Admin Activation Key")]
-            public string AdminKey { get; set; }
 
             [Display(Name = "Name")]
             [Required(ErrorMessage = "{0} can not be empty")]
@@ -107,21 +97,15 @@ namespace Gunis.Kitchen.Areas.Identity.Pages.Account
                     Name = Input.Name,
                     DateOfBirth = Input.DateOfBirth,
                     Gender = Input.Gender,
-                    AdminKey = Input.AdminKey
+               
                 };
-                var result = await _userManager.CreateAsync(user, Input.Password);
-                
+                var result = await _userManager.CreateAsync(user, StandardPassword);
+                //string EXPECTEDADMINKEY = "tghd53shhu7836vdh";
                 if (result.Succeeded)
                 {
-                    if (user.AdminKey == EXPECTEDADMINKEY)
-                    {
-                     _userManager.AddToRoleAsync(user, "Admin").Wait();
-                    }
-                    else
-                    {
-                     _userManager.AddToRoleAsync(user, "User").Wait();
 
-                    }
+                    _userManager.AddToRoleAsync(user, "Admin").Wait();
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -131,7 +115,8 @@ namespace Gunis.Kitchen.Areas.Identity.Pages.Account
                         pageHandler: null,
                         values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
-                    if (! _hostEnvironment.IsDevelopment()) { 
+                    if(!_environment.IsDevelopment())
+                    {   
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
                     }

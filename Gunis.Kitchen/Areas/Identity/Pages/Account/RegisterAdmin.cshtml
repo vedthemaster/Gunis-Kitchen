@@ -1,0 +1,92 @@
+﻿@page
+@model RegisterManagerModel
+@using Gunis.Kitchen.Models.Enums
+@{
+    ViewData["Title"] = "Register Manager";
+}
+<div class="container">
+
+
+    <h1>@ViewData["Title"]</h1>
+
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <h4>Create a new account.</h4>
+                <hr />
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Input.Email"></label>
+                    <input asp-for="Input.Email" class="form-control" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+   
+                <div class="form-group">
+                    <label asp-for="Input.Name"></label>
+                    <input asp-for="Input.Name" class="form-control" />
+                    <span asp-validation-for="Input.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.DateOfBirth"></label>
+                    <input asp-for="Input.DateOfBirth" class="form-control" />
+                    <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>
+                </div>
+     
+                <div class="form-group">
+                    <label asp-for="Input.Gender"></label>
+                    <br>
+
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-success">
+                        <input asp-for="Input.Gender" type="radio" class="form-check-input"
+                               id="Input.Gender.Male" name="Input.Gender"
+                               value="@MyIdentityGenders.Male" />
+                        Male
+                    </label>
+                    <label class="btn btn-success">
+                        <input asp-for="Input.Gender" type="radio" class="form-check-input"
+                               id="Input.Gender.Female" name="Input.Gender"
+                               value="@MyIdentityGenders.Female" />
+                        Female
+                    </label>
+                    <label class="btn btn-success">
+                        <input asp-for="Input.Gender" type="radio" class="form-check-input"
+                               id="Input.Gender.ThirdGender" name="Input.Gender"
+                               value="@MyIdentityGenders.ThirdGender" />
+                        Third Gender
+                    </label>
+                </div>
+                    @* <input asp-for="Input.Gender" class="form-control" /> *@
+                    @*       <select asp-for="Input.Gender" class="form-control">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        </select>*@
+                    <span asp-validation-for="Input.Gender" class="text-danger" style="Disply:block;"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Register Manager</button>
+            </form>
+        </div>
+        <div class="col-md-6 col-md-offset-2">
+            <section>
+                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl"
+                            method="post" class="form-horizontal">
+                            <div>
+                                <p>
+                            @foreach (var provider in Model.ExternalLogins)
+                            {
+                                                <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name"
+                                    title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                            }
+                                </p>
+                            </div>
+                        </form>
+
+
+            </section>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}

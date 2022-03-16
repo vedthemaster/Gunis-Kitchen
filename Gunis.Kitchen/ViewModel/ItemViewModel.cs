@@ -1,14 +1,14 @@
-﻿using Gunis.Kitchen.Models.Enums;
+﻿using Gunis.Kitchen.Models;
+using Gunis.Kitchen.Models.Enums;
 using Microsoft.AspNetCore.Http;
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Gunis.Kitchen.Models
+namespace Gunis.Kitchen.ViewModel
 {
-    [Table("Items")]
-    public class Item
+    public class ItemViewModel
     {
+
         [Display(Name = "Item Id")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
@@ -24,8 +24,8 @@ namespace Gunis.Kitchen.Models
         [Range(minimum: 100, maximum: 2000, ErrorMessage = "{0} needs to between {1} and {2}")]
         public decimal ItemPrice { get; set; }
 
-
-        [Display(Name ="Unit of Measure")]
+        [Required]
+        [Display(Name = "Unit of Measure")]
         public string UnitOfMeasure { get; set; }
 
         //[Display(Name = "Item Size")]
@@ -43,13 +43,8 @@ namespace Gunis.Kitchen.Models
         //[Required(ErrorMessage ="It can not be blank")]
         //public IFormFile ItemImage { get; set; }
 
-
-        [StringLength(150)]
-        public string ItemImageFileUrl { get; set; }
-
-
-        [StringLength(60)]
-        public string ItemImageContentType { get; set; }
+        [Display(Name="Item Image")]
+        public IFormFile ItemPhoto { get; set; }
 
 
         #region
@@ -62,6 +57,5 @@ namespace Gunis.Kitchen.Models
 
 
         #endregion
-
     }
 }

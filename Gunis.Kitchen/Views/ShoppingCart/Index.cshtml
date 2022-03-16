@@ -33,7 +33,7 @@
                 {
                     <tr>
                         <td class="text-center">@line.Quantity</td>
-                        <td> <img src="@Url.Content("~/image/"+@line.Item.ImageName)"> </td>
+                        @*<td> <img src="@Url.Content("~/image/"+@line.Item.ImageName)"> </td>*@
                         <td class="text-left">@line.Item.ItemName</td>
                         <td class="text-right">@line.Item.ItemPrice.ToString("c")</td>
                         <td class="text-right">

@@ -1,16 +1,19 @@
-﻿@model Gunis.Kitchen.Models.Item
+﻿@model Gunis.Kitchen.ViewModel.ItemViewModel
 @using Gunis.Kitchen.Models.Enums
 
 @{
     ViewData["Title"] = "Create";
 }
 
+<div class= "container">
 <h1>Create</h1>
 
 <h4>Item</h4>
-<hr />
+<hr/>
+
+
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-12">
         <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -22,6 +25,11 @@
                 <label asp-for="ItemPrice" class="control-label"></label>
                 <input asp-for="ItemPrice" class="form-control" />
                 <span asp-validation-for="ItemPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UnitOfMeasure" class="control-label"></label>
+                <input asp-for="UnitOfMeasure" class="form-control" />
+                <span asp-validation-for="UnitOfMeasure" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ItemSize" class="control-label"></label>
@@ -37,10 +45,22 @@
                 </select>
                 <span asp-validation-for="ItemSize" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ItemImage" class="control-label"></label>
-                <input asp-for="ItemImage" accept="image/*" />
-                <span asp-validation-for="ItemImage" class="text-danger"></span>
+           @* <div class="form-group">
+                <label asp-for="ItemPhoto" class="control-label"></label>
+                <input asp-for="ItemPhoto" accept="image/*" />
+                <span asp-validation-for="ItemPhoto" class="text-danger"></span>
+            </div>*@
+
+             <div class="form-group">
+                <label asp-for="ItemPhoto" style="width: 100%;"></label>
+                <img id="profilePicture" src=""
+                     style="width: 350px; height: 350px; object-fit: cover; border: 1px solid #808080;" />
+                <input type="file" asp-for="ItemPhoto"
+                       accept=".png,.jpg,.jpeg,.gif,.tif"
+                       class="form-control"
+                       style="border:0px!important;padding: 0px;padding-top: 10px;padding-bottom: 30px;"
+                       onchange="document.getElementById('profilePicture').src = window.URL.createObjectURL(this.files[0])" />
+                <span asp-validation-for="ItemPhoto" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CategoryID" class="control-label"></label>
@@ -55,6 +75,7 @@
 
 <div>
     <a asp-action="Index">Back to List</a>
+</div>
 </div>
 
 @section Scripts {
