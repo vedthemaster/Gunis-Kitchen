@@ -16,7 +16,7 @@ namespace Gunis.Kitchen.ViewModel
         [Display(Name ="Name")]
         public string Name { get; set; }
 
-        [Display(Name="Roles of USer")]
+        [Display(Name="Roles of User")]
         public List<string> RolesOfUser { get; set; }
 
     }
